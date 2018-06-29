@@ -6,26 +6,29 @@
 //  Copyright © 2018年 ZHK. All rights reserved.
 //
 
-#import "ZHKBottomMenuView.h"
-
+#import "ZHKBottomPopMenuView.h"
+#import "ZHKPopContentView.h"
+#import "UIResponder+ZHKPopRouter.h"
 
 #define BM_SIZE [UIScreen mainScreen].bounds.size
 
-static CGFloat height = 300.0f;
 static CGFloat gap = 50.0f;
 
-@interface ZHKBottomMenuView () <UIGestureRecognizerDelegate>
+@interface ZHKBottomPopMenuView () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) ZHKPopContentView *contentView;
+@property (nonatomic, strong) UIButton *cancelBtn;
+@property (nonatomic, strong) UILabel  *titleLabel;
 
 @end
 
-@implementation ZHKBottomMenuView
+@implementation ZHKBottomPopMenuView
 
 #pragma mark - Init
 
 - (instancetype)init {
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
+        self.height = 300.0f;
         [self createUI];
     }
     return self;
@@ -44,10 +47,20 @@ static CGFloat gap = 50.0f;
     [self addGestureRecognizer:tap];
 }
 
-#pragma mark -
+#pragma mark - UIGestureRecognizer delegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return ![touch.view isEqual:self.contentView];
+    return [touch.view isKindOfClass:[self class]];
+}
+
+#pragma mark - Router
+
+- (void)routerWithEvent:(ZHKResponderEventType)type index:(NSUInteger)index {
+    if (type == ZHKResponderEventTypeCancel) {
+        [self hideAnimation];
+    } else {
+        
+    }
 }
 
 #pragma mark - Animation
@@ -55,11 +68,12 @@ static CGFloat gap = 50.0f;
 - (void)showAnimation {
     self.hidden = NO;
     [self makeKeyAndVisible];
+    _contentView.frame = CGRectMake(0, BM_SIZE.height, BM_SIZE.width, _height + gap);
     [UIView animateWithDuration:0.1 animations:^{
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:0.7 initialSpringVelocity:1.6 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            _contentView.frame = CGRectMake(0, BM_SIZE.height - height, BM_SIZE.width, height + gap);
+            _contentView.frame = CGRectMake(0, BM_SIZE.height - _height, BM_SIZE.width, _height + gap);
         } completion:^(BOOL finished) {
             
         }];
@@ -68,7 +82,7 @@ static CGFloat gap = 50.0f;
 
 - (void)hideAnimation {
     [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:1.0 initialSpringVelocity:0.6 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        _contentView.frame = CGRectMake(0, BM_SIZE.height, BM_SIZE.width, height + gap);
+        _contentView.frame = CGRectMake(0, BM_SIZE.height, BM_SIZE.width, _height + gap);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.1 animations:^{
             self.backgroundColor = [UIColor clearColor];
@@ -81,11 +95,10 @@ static CGFloat gap = 50.0f;
 
 #pragma mark - Getter
 
-- (UIView *)contentView {
+- (ZHKPopContentView *)contentView {
     if (_contentView == nil) {
-        self.contentView = [UIView new];
-        _contentView.backgroundColor = [UIColor whiteColor];
-        _contentView.frame = CGRectMake(0, BM_SIZE.height, BM_SIZE.width, height + gap);
+        self.contentView = [ZHKPopContentView new];
+        _contentView.frame = CGRectMake(0, BM_SIZE.height, BM_SIZE.width, _height + gap);
     }
     return _contentView;
 }

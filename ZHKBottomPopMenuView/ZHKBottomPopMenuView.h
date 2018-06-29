@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZHKBottomMenuView : UIWindow
+@interface ZHKBottomPopMenuView : UIWindow
 
 @property (nonatomic, strong) NSString *title;
+
+@property (nonatomic, assign) CGFloat height;
 
 - (void)showAnimation;
 

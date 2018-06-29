@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "ZHKBottomMenuView.h"
+#import "ZHKBottomPopMenuView.h"
 
 @interface ViewController ()
 
-@property (nonatomic, strong) ZHKBottomMenuView *bmView;
+@property (nonatomic, strong) ZHKBottomPopMenuView *bmView;
 
 @end
 
@@ -21,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.bmView = [[ZHKBottomMenuView alloc] init];
+    self.bmView = [[ZHKBottomPopMenuView alloc] init];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(show)];
 }
