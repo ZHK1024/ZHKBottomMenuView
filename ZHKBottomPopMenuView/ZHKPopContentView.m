@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UILabel          *titleLabel;
 @property (nonatomic, strong) UIButton         *button;
+@property (nonatomic, strong) UIView           *gapView;
 
 @end
 
@@ -34,6 +35,7 @@
     [self addSubview:self.titleLabel];
     [self addSubview:self.collectionView];
     [self addSubview:self.button];
+    [self addSubview:self.gapView];
     
     self.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
     _collectionView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
@@ -47,6 +49,7 @@
     [_titleLabel sizeToFit];
     _titleLabel.center = CGPointMake(width / 2, 25.0f);
     _button.frame = CGRectMake(0, height - 50.0f, width, 50.0f);
+    _gapView.frame = CGRectMake(0, height, width, 50.0f);
     _collectionView.frame = CGRectMake(0, 50.0f, width, height - 50.0f - 50.0f);
 }
 
@@ -71,8 +74,10 @@
 - (UIButton *)button {
     if (_button == nil) {
         self.button = [UIButton buttonWithType:UIButtonTypeSystem];
+        _button.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
         [_button setBackgroundColor:[UIColor whiteColor]];
-        [_button setTitle:@"Cancel" forState:(UIControlStateNormal)];
+        [_button setTitle:@"取消" forState:(UIControlStateNormal)];
+        [_button setTitleColor:[UIColor darkGrayColor] forState:(UIControlStateNormal)];
         [_button addTarget:self action:@selector(cancelButtonAction) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _button;
@@ -84,6 +89,14 @@
         self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     }
     return _collectionView;
+}
+
+- (UIView *)gapView {
+    if (_gapView == nil) {
+        self.gapView = [UIView new];
+        _gapView.backgroundColor = [UIColor whiteColor];
+    }
+    return _gapView;
 }
 
 @end
