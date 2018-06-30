@@ -15,6 +15,12 @@ typedef NS_ENUM(NSUInteger, ZHKResponderEventType) {
 
 @interface UIResponder (ZHKPopRouter)
 
+/**
+ 事件传递函数
+
+ @param type  事件类型
+ @param index item 被选中的 index
+ */
 - (void)routerWithEvent:(ZHKResponderEventType)type index:(NSUInteger)index;
 
 @end

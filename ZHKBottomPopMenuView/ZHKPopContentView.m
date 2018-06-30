@@ -7,13 +7,12 @@
 //
 
 #import "ZHKPopContentView.h"
+#import "ZHKBottomPopMenuCell.h"
 #import "UIResponder+ZHKPopRouter.h"
 
-@interface ZHKPopContentView ()
+@interface ZHKPopContentView () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) UILabel          *titleLabel;
-@property (nonatomic, strong) UIButton         *button;
 @property (nonatomic, strong) UIView           *gapView;
 
 @end
@@ -47,7 +46,7 @@
     CGFloat width = CGRectGetWidth(self.bounds);
     CGFloat height = CGRectGetHeight(self.bounds) - 50;
     [_titleLabel sizeToFit];
-    _titleLabel.center = CGPointMake(width / 2, 25.0f);
+    _titleLabel.center = CGPointMake(width / 2, 30.0f);
     _button.frame = CGRectMake(0, height - 50.0f, width, 50.0f);
     _gapView.frame = CGRectMake(0, height, width, 50.0f);
     _collectionView.frame = CGRectMake(0, 50.0f, width, height - 50.0f - 50.0f);
@@ -59,12 +58,31 @@
     [[self nextResponder] routerWithEvent:ZHKResponderEventTypeCancel index:0];
 }
 
+#pragma mark - UICollectionView dataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ZHKBottomPopMenuCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ZHKBottomPopMenuCell_IDFR forIndexPath:indexPath];
+    return cell;
+}
+
+#pragma mark - UICollectionView delegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [[self nextResponder] routerWithEvent:ZHKResponderEventTypeSelected index:indexPath.row];
+}
+
+#pragma mark - Setter
+
 #pragma mark - Getter
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
         self.titleLabel = [UILabel new];
-        _titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        _titleLabel.font = [UIFont systemFontOfSize:17.0f];
         _titleLabel.textColor = [UIColor grayColor];
         _titleLabel.text = @"标题";
     }
@@ -85,10 +103,24 @@
 
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
+        self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.layout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        [_collectionView registerClass:[ZHKBottomPopMenuCell class] forCellWithReuseIdentifier:ZHKBottomPopMenuCell_IDFR];
+        _collectionView.pagingEnabled = YES;
     }
     return _collectionView;
+}
+
+- (UICollectionViewFlowLayout *)layout {
+    if (_layout == nil) {
+        self.layout = [[UICollectionViewFlowLayout alloc] init];
+        _layout.itemSize = CGSizeMake(70, 70);
+        _layout.minimumLineSpacing = 15.0f;
+        _layout.minimumInteritemSpacing = 10.0f;
+        _layout.sectionInset = UIEdgeInsetsMake(15, 30, 15, 30);
+    }
+    return _layout;
 }
 
 - (UIView *)gapView {

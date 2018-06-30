@@ -10,4 +10,8 @@
 
 @interface ZHKPopContentView : UIView
 
+@property (nonatomic, strong) UILabel  *titleLabel;
+@property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+
 @end

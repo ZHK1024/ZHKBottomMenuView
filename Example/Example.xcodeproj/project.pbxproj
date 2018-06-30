@@ -16,6 +16,7 @@
 		24EBBEDD20E6252B00EEC8C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EBBED920E6252B00EEC8C8 /* ViewController.m */; };
 		24EBBEDE20E6252B00EEC8C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EBBEDC20E6252B00EEC8C8 /* AppDelegate.m */; };
 		24EBBF0120E6266500EEC8C8 /* ZHKBottomPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EBBF0020E6266400EEC8C8 /* ZHKBottomPopMenuView.m */; };
+		8BD7C88320E7DA03008843E3 /* ZHKBottomPopMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD7C88220E7DA03008843E3 /* ZHKBottomPopMenuCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		24EBBEDC20E6252B00EEC8C8 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		24EBBEFF20E6266400EEC8C8 /* ZHKBottomPopMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHKBottomPopMenuView.h; sourceTree = "<group>"; };
 		24EBBF0020E6266400EEC8C8 /* ZHKBottomPopMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHKBottomPopMenuView.m; sourceTree = "<group>"; };
+		8BD7C88120E7DA03008843E3 /* ZHKBottomPopMenuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHKBottomPopMenuCell.h; sourceTree = "<group>"; };
+		8BD7C88220E7DA03008843E3 /* ZHKBottomPopMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHKBottomPopMenuCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,8 @@
 				24EBBF0020E6266400EEC8C8 /* ZHKBottomPopMenuView.m */,
 				24BF829420E628AB00D1455E /* ZHKPopContentView.h */,
 				24BF829520E628AB00D1455E /* ZHKPopContentView.m */,
+				8BD7C88120E7DA03008843E3 /* ZHKBottomPopMenuCell.h */,
+				8BD7C88220E7DA03008843E3 /* ZHKBottomPopMenuCell.m */,
 				242A7CC820E63011005DBACC /* UIResponder+ZHKPopRouter.h */,
 				242A7CC920E63011005DBACC /* UIResponder+ZHKPopRouter.m */,
 			);
@@ -182,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD7C88320E7DA03008843E3 /* ZHKBottomPopMenuCell.m in Sources */,
 				24EBBF0120E6266500EEC8C8 /* ZHKBottomPopMenuView.m in Sources */,
 				242A7CCA20E63011005DBACC /* UIResponder+ZHKPopRouter.m in Sources */,
 				24EBBEDD20E6252B00EEC8C8 /* ViewController.m in Sources */,
@@ -322,8 +328,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9K5P26QDPB;
+				DEVELOPMENT_TEAM = 632BTLC38V;
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ZHK.Example.bottomview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -336,8 +343,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9K5P26QDPB;
+				DEVELOPMENT_TEAM = 632BTLC38V;
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ZHK.Example.bottomview;
 				PRODUCT_NAME = "$(TARGET_NAME)";

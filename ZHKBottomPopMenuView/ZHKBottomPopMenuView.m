@@ -29,6 +29,12 @@ static CGFloat gap = 50.0f;
 - (instancetype)init {
     if (self = [super initWithFrame:[UIScreen mainScreen].bounds]) {
         self.height = 300.0f;
+        // iPhone X
+        if (CGSizeEqualToSize(BM_SIZE, CGSizeMake(375.0f, 812.0f))) {
+            gap = 34.0f;
+        }
+        NSLog(@"%@", NSStringFromCGSize(BM_SIZE));
+        
         [self createUI];
     }
     return self;
@@ -56,11 +62,17 @@ static CGFloat gap = 50.0f;
 #pragma mark - Router
 
 - (void)routerWithEvent:(ZHKResponderEventType)type index:(NSUInteger)index {
-    if (type == ZHKResponderEventTypeCancel) {
-        [self hideAnimation];
-    } else {
-        
+    [self hideAnimation];
+    if (type == ZHKResponderEventTypeSelected &&
+        [_delegate respondsToSelector:@selector(menuView:didSelectAtIndex:)]) {
+        [_delegate menuView:self didSelectAtIndex:index];
     }
+}
+
+#pragma mark
+
+- (void)show {
+    [self showAnimation];
 }
 
 #pragma mark - Animation
@@ -91,6 +103,15 @@ static CGFloat gap = 50.0f;
             [self resignKeyWindow];
         }];
     }];
+}
+
+#pragma mark - Setter
+
+- (void)setTitle:(NSString *)title {
+    if (_title != title) {
+        _title = title;
+        _contentView.titleLabel.text = _title;
+    }
 }
 
 #pragma mark - Getter
